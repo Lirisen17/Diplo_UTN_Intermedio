@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="es" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>vista &mdash; documentación de AppIntermedia - 0.0.1</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+        <script src="../_static/translations.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Índice" href="../genindex.html" />
+    <link rel="search" title="Búsqueda" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            AppIntermedia
+          </a>
+              <div class="version">
+                0.0.1
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Buscar documentos" aria-label="Buscar documentos" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../controlador.html">controlador module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../database.html">database module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modelo.html">modelo module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../regex.html">regex module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../vista.html">vista module</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">AppIntermedia</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Código de módulo</a></li>
+      <li class="breadcrumb-item active">vista</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Código fuente para vista</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">tkinter</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">StringVar</span><span class="p">,</span>
+    <span class="n">CENTER</span><span class="p">,</span>
+    <span class="n">Label</span><span class="p">,</span>
+    <span class="n">Button</span><span class="p">,</span>
+    <span class="n">Entry</span><span class="p">,</span>
+    <span class="n">DoubleVar</span><span class="p">,</span>
+    <span class="n">ttk</span><span class="p">,</span>
+<span class="p">)</span>
+
+
+<span class="kn">from</span> <span class="nn">modelo</span> <span class="kn">import</span> <span class="n">Abmc</span>
+
+<span class="c1"># declaración de todas las variables del programa:</span>
+
+
+<div class="viewcode-block" id="Ventana"><a class="viewcode-back" href="../vista.html#vista.Ventana">[documentos]</a><span class="k">class</span> <span class="nc">Ventana</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Al instanciarse un objeto de la clase Ventana, se crea un objeto de la clase abmc para poder acceder a sus metodos de instancia</span>
+<span class="sd">        y se setea la configuracion basica de la ventana junto con todos sus botones, entrys y labels. Tambien se crea el Tkinter.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">window</span><span class="p">):</span>        
+        <span class="bp">self</span><span class="o">.</span><span class="n">objeto_base</span> <span class="o">=</span> <span class="n">Abmc</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">principal</span> <span class="o">=</span> <span class="n">window</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">principal</span><span class="o">.</span><span class="n">geometry</span><span class="p">(</span><span class="s2">&quot;729x365&quot;</span><span class="p">)</span>  <span class="c1"># tamaño de ventana</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">principal</span><span class="o">.</span><span class="n">resizable</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">principal</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Calculadora de costos en transformadores&quot;</span><span class="p">)</span>
+
+        <span class="c1"># declaracion de los entry para que el usuario cargue datos:</span>
+
+        <span class="n">var_ordenar_str</span> <span class="o">=</span> <span class="n">StringVar</span><span class="p">()</span>
+        <span class="nb">id</span> <span class="o">=</span> <span class="n">StringVar</span><span class="p">()</span>
+        <span class="n">var_cobre</span> <span class="o">=</span> <span class="n">DoubleVar</span><span class="p">()</span>
+        <span class="n">var_aceite</span> <span class="o">=</span> <span class="n">DoubleVar</span><span class="p">()</span>
+        <span class="n">var_pintura</span> <span class="o">=</span> <span class="n">DoubleVar</span><span class="p">()</span>
+        <span class="n">var_ogp</span> <span class="o">=</span> <span class="n">DoubleVar</span><span class="p">()</span>
+        <span class="n">var_mo</span> <span class="o">=</span> <span class="n">DoubleVar</span><span class="p">()</span>
+        <span class="n">var_id_buscar</span> <span class="o">=</span> <span class="n">StringVar</span><span class="p">()</span>
+        <span class="n">var_id_borrar</span> <span class="o">=</span> <span class="n">StringVar</span><span class="p">()</span>
+        <span class="n">costo_fijo</span> <span class="o">=</span> <span class="mi">400</span>
+        <span class="n">valor_transformador</span> <span class="o">=</span> <span class="mi">3750</span>
+        <span class="n">margen</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">w</span> <span class="o">=</span> <span class="mi">14</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">numero_transformador</span> <span class="o">=</span> <span class="n">Entry</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">principal</span><span class="p">,</span> <span class="n">textvariable</span><span class="o">=</span><span class="nb">id</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="n">w</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">numero_transformador</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">cobre</span> <span class="o">=</span> <span class="n">Entry</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">principal</span><span class="p">,</span> <span class="n">textvariable</span><span class="o">=</span><span class="n">var_cobre</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="n">w</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cobre</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">aceite</span> <span class="o">=</span> <span class="n">Entry</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">principal</span><span class="p">,</span> <span class="n">textvariable</span><span class="o">=</span><span class="n">var_aceite</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="n">w</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">aceite</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">pintura</span> <span class="o">=</span> <span class="n">Entry</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">principal</span><span class="p">,</span> <span class="n">textvariable</span><span class="o">=</span><span class="n">var_pintura</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="n">w</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pintura</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">ogp</span> <span class="o">=</span> <span class="n">Entry</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">principal</span><span class="p">,</span> <span class="n">textvariable</span><span class="o">=</span><span class="n">var_ogp</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="n">w</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ogp</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">mo</span> <span class="o">=</span> <span class="n">Entry</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">principal</span><span class="p">,</span> <span class="n">textvariable</span><span class="o">=</span><span class="n">var_mo</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="n">w</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mo</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">id_buscar</span> <span class="o">=</span> <span class="n">Entry</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">principal</span><span class="p">,</span> <span class="n">textvariable</span><span class="o">=</span><span class="n">var_id_buscar</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="n">w</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">id_buscar</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">id_borrar</span> <span class="o">=</span> <span class="n">Entry</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">principal</span><span class="p">,</span> <span class="n">textvariable</span><span class="o">=</span><span class="n">var_id_borrar</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="n">w</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">id_borrar</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span>
+
+        <span class="c1"># declaración de los labels que le indican al usuario que datos ingresar:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">label_id</span> <span class="o">=</span> <span class="n">Label</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">principal</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s2">&quot;ID del Transformador: &quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">label_id</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">sticky</span><span class="o">=</span><span class="s2">&quot;W&quot;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">label_cobre</span> <span class="o">=</span> <span class="n">Label</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">principal</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s2">&quot;Kg de cobre: &quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">label_cobre</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">sticky</span><span class="o">=</span><span class="s2">&quot;W&quot;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">label_aceite</span> <span class="o">=</span> <span class="n">Label</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">principal</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s2">&quot;Lts de Aceite:&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">label_aceite</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">sticky</span><span class="o">=</span><span class="s2">&quot;W&quot;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">label_pintura</span> <span class="o">=</span> <span class="n">Label</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">principal</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s2">&quot;Lts de Pintura:&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">label_pintura</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">sticky</span><span class="o">=</span><span class="s2">&quot;W&quot;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">label_ogp</span> <span class="o">=</span> <span class="n">Label</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">principal</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s2">&quot;Precio de OGPs: &quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">label_ogp</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">sticky</span><span class="o">=</span><span class="s2">&quot;W&quot;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">label_mo</span> <span class="o">=</span> <span class="n">Label</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">principal</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s2">&quot;Hs Mano de obra:&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">label_mo</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">sticky</span><span class="o">=</span><span class="s2">&quot;W&quot;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">label_costo_fijo</span> <span class="o">=</span> <span class="n">Label</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">principal</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s2">&quot;Costo fijo promedio:&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">label_costo_fijo</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">sticky</span><span class="o">=</span><span class="s2">&quot;W&quot;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">lavel_valor_costo_fijo</span> <span class="o">=</span> <span class="n">Label</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">principal</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="n">costo_fijo</span><span class="p">,</span> <span class="n">borderwidth</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">relief</span><span class="o">=</span><span class="s2">&quot;groove&quot;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">12</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">lavel_valor_costo_fijo</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">pady</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">ordenar_por</span> <span class="o">=</span> <span class="n">Label</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">principal</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s2">&quot;Ordenar por&quot;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ordenar_por</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">var_ordenar</span> <span class="o">=</span> <span class="n">ttk</span><span class="o">.</span><span class="n">Combobox</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">principal</span><span class="p">,</span> <span class="n">textvariable</span><span class="o">=</span><span class="n">var_ordenar_str</span><span class="p">,</span> <span class="n">state</span><span class="o">=</span><span class="s2">&quot;readonly&quot;</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">var_ordenar</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">column</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">row</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">var_ordenar</span><span class="p">[</span><span class="s2">&quot;values&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="s2">&quot;id&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;cobre&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;aceite&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;pintura&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;ogp&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;margen&quot;</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">var_ordenar</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">&quot;id&quot;</span><span class="p">)</span>
+
+        <span class="c1"># definición de los botones de alta, modficar, buscar,borrar, sacar filtro y graficar:</span>
+        
+        <span class="n">alta</span> <span class="o">=</span> <span class="n">Button</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">principal</span><span class="p">,</span>
+            <span class="n">text</span><span class="o">=</span><span class="s2">&quot;alta&quot;</span><span class="p">,</span>
+            <span class="n">command</span><span class="o">=</span><span class="k">lambda</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">objeto_base</span><span class="o">.</span><span class="n">alta_trafo</span><span class="p">(</span>
+                <span class="n">var_ordenar_str</span><span class="p">,</span>
+                <span class="n">var_aceite</span><span class="p">,</span>
+                <span class="n">var_cobre</span><span class="p">,</span>
+                <span class="nb">id</span><span class="p">,</span>
+                <span class="n">var_mo</span><span class="p">,</span>
+                <span class="n">var_ogp</span><span class="p">,</span>
+                <span class="n">var_pintura</span><span class="p">,</span>
+                <span class="n">valor_transformador</span><span class="p">,</span>
+                <span class="n">costo_fijo</span><span class="p">,</span>
+                <span class="n">margen</span><span class="p">,</span>
+                <span class="n">tree</span><span class="p">,</span>
+            <span class="p">),</span>
+            <span class="n">width</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+            <span class="n">background</span><span class="o">=</span><span class="s2">&quot;lightgreen&quot;</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="n">alta</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">pady</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+        
+        <span class="n">modificar</span> <span class="o">=</span> <span class="n">Button</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">principal</span><span class="p">,</span>
+            <span class="n">text</span><span class="o">=</span><span class="s2">&quot;modificar&quot;</span><span class="p">,</span>
+            <span class="n">command</span><span class="o">=</span><span class="k">lambda</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">objeto_base</span><span class="o">.</span><span class="n">modificar_trafo</span><span class="p">(</span>
+                <span class="n">var_ordenar_str</span><span class="p">,</span>
+                <span class="n">tree</span><span class="p">,</span>
+                <span class="n">var_aceite</span><span class="p">,</span>
+                <span class="n">var_cobre</span><span class="p">,</span>
+                <span class="nb">id</span><span class="p">,</span>
+                <span class="n">var_mo</span><span class="p">,</span>
+                <span class="n">var_ogp</span><span class="p">,</span>
+                <span class="n">var_pintura</span><span class="p">,</span>
+                <span class="n">valor_transformador</span><span class="p">,</span>
+                <span class="n">costo_fijo</span><span class="p">,</span>
+                <span class="n">margen</span><span class="p">,</span>
+            <span class="p">),</span>
+            <span class="n">width</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+            <span class="n">background</span><span class="o">=</span><span class="s2">&quot;#6CB7EB&quot;</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="n">modificar</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+        
+        <span class="n">buscar_por_id</span> <span class="o">=</span> <span class="n">Button</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">principal</span><span class="p">,</span>
+            <span class="n">text</span><span class="o">=</span><span class="s2">&quot;Filtrar por ID&quot;</span><span class="p">,</span>
+            <span class="n">command</span><span class="o">=</span><span class="k">lambda</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">objeto_base</span><span class="o">.</span><span class="n">buscar_id</span><span class="p">(</span><span class="n">var_id_buscar</span><span class="p">,</span> <span class="n">tree</span><span class="p">),</span>
+            <span class="n">width</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+            <span class="n">background</span><span class="o">=</span><span class="s2">&quot;yellow&quot;</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="n">buscar_por_id</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">padx</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">pady</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+     
+        <span class="n">borrar_por_id</span> <span class="o">=</span> <span class="n">Button</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">principal</span><span class="p">,</span>
+            <span class="n">text</span><span class="o">=</span><span class="s2">&quot;Borrar ID&quot;</span><span class="p">,</span>
+            <span class="n">command</span><span class="o">=</span><span class="k">lambda</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">objeto_base</span><span class="o">.</span><span class="n">borrar_id</span><span class="p">(</span>
+                <span class="n">var_id_borrar</span><span class="p">,</span> <span class="n">tree</span><span class="p">,</span> <span class="n">var_ordenar_str</span>
+            <span class="p">),</span>
+            <span class="n">background</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">,</span>
+            <span class="n">width</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="n">borrar_por_id</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">padx</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">pady</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+       
+        <span class="n">quitar_filtros</span> <span class="o">=</span> <span class="n">Button</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">principal</span><span class="p">,</span>
+            <span class="n">text</span><span class="o">=</span><span class="s2">&quot;Actualizar&quot;</span><span class="p">,</span>
+            <span class="n">command</span><span class="o">=</span><span class="k">lambda</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">objeto_base</span><span class="o">.</span><span class="n">mostrar</span><span class="p">(</span><span class="n">tree</span><span class="p">,</span> <span class="n">var_ordenar_str</span><span class="p">),</span>
+            <span class="n">width</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+            <span class="n">background</span><span class="o">=</span><span class="s2">&quot;#F4F1CE&quot;</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="n">quitar_filtros</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+       
+        <span class="n">graficar</span> <span class="o">=</span> <span class="n">Button</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">principal</span><span class="p">,</span>
+            <span class="n">text</span><span class="o">=</span><span class="s2">&quot;Grafico Margenes&quot;</span><span class="p">,</span>
+            <span class="n">command</span><span class="o">=</span><span class="k">lambda</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">objeto_base</span><span class="o">.</span><span class="n">graficos</span><span class="p">(),</span>
+            <span class="n">width</span><span class="o">=</span><span class="mi">13</span><span class="p">,</span>
+            <span class="n">background</span><span class="o">=</span><span class="s2">&quot;#E68849&quot;</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="n">graficar</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+     
+        <span class="c1"># Hago el treeview</span>
+
+        <span class="n">tree</span> <span class="o">=</span> <span class="n">ttk</span><span class="o">.</span><span class="n">Treeview</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">principal</span><span class="p">)</span>
+        <span class="n">tree</span><span class="p">[</span><span class="s2">&quot;columns&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;col1&quot;</span><span class="p">,</span> <span class="s2">&quot;col2&quot;</span><span class="p">,</span> <span class="s2">&quot;col3&quot;</span><span class="p">,</span> <span class="s2">&quot;col4&quot;</span><span class="p">,</span> <span class="s2">&quot;col5&quot;</span><span class="p">,</span> <span class="s2">&quot;col6&quot;</span><span class="p">,</span> <span class="s2">&quot;col7&quot;</span><span class="p">)</span>
+
+        <span class="n">tree</span><span class="o">.</span><span class="n">column</span><span class="p">(</span><span class="s2">&quot;#0&quot;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">90</span><span class="p">,</span> <span class="n">anchor</span><span class="o">=</span><span class="n">CENTER</span><span class="p">)</span>
+        <span class="n">tree</span><span class="o">.</span><span class="n">column</span><span class="p">(</span><span class="s2">&quot;col1&quot;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">90</span><span class="p">,</span> <span class="n">anchor</span><span class="o">=</span><span class="n">CENTER</span><span class="p">)</span>
+        <span class="n">tree</span><span class="o">.</span><span class="n">column</span><span class="p">(</span><span class="s2">&quot;col2&quot;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">90</span><span class="p">,</span> <span class="n">anchor</span><span class="o">=</span><span class="n">CENTER</span><span class="p">)</span>
+        <span class="n">tree</span><span class="o">.</span><span class="n">column</span><span class="p">(</span><span class="s2">&quot;col3&quot;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">90</span><span class="p">,</span> <span class="n">anchor</span><span class="o">=</span><span class="n">CENTER</span><span class="p">)</span>
+        <span class="n">tree</span><span class="o">.</span><span class="n">column</span><span class="p">(</span><span class="s2">&quot;col4&quot;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">90</span><span class="p">,</span> <span class="n">anchor</span><span class="o">=</span><span class="n">CENTER</span><span class="p">)</span>
+        <span class="n">tree</span><span class="o">.</span><span class="n">column</span><span class="p">(</span><span class="s2">&quot;col5&quot;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">90</span><span class="p">,</span> <span class="n">anchor</span><span class="o">=</span><span class="n">CENTER</span><span class="p">)</span>
+        <span class="n">tree</span><span class="o">.</span><span class="n">column</span><span class="p">(</span><span class="s2">&quot;col6&quot;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">90</span><span class="p">,</span> <span class="n">anchor</span><span class="o">=</span><span class="n">CENTER</span><span class="p">)</span>
+        <span class="n">tree</span><span class="o">.</span><span class="n">column</span><span class="p">(</span><span class="s2">&quot;col7&quot;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">90</span><span class="p">,</span> <span class="n">anchor</span><span class="o">=</span><span class="n">CENTER</span><span class="p">)</span>
+
+        <span class="n">tree</span><span class="o">.</span><span class="n">heading</span><span class="p">(</span><span class="s2">&quot;#0&quot;</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s2">&quot;ID&quot;</span><span class="p">)</span>
+        <span class="n">tree</span><span class="o">.</span><span class="n">heading</span><span class="p">(</span><span class="s2">&quot;col1&quot;</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s2">&quot;Cobre&quot;</span><span class="p">)</span>
+        <span class="n">tree</span><span class="o">.</span><span class="n">heading</span><span class="p">(</span><span class="s2">&quot;col2&quot;</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s2">&quot;Pintura&quot;</span><span class="p">)</span>
+        <span class="n">tree</span><span class="o">.</span><span class="n">heading</span><span class="p">(</span><span class="s2">&quot;col3&quot;</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s2">&quot;Aceite&quot;</span><span class="p">)</span>
+        <span class="n">tree</span><span class="o">.</span><span class="n">heading</span><span class="p">(</span><span class="s2">&quot;col4&quot;</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s2">&quot;Mano de Obra&quot;</span><span class="p">)</span>
+        <span class="n">tree</span><span class="o">.</span><span class="n">heading</span><span class="p">(</span><span class="s2">&quot;col5&quot;</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s2">&quot;OGP&quot;</span><span class="p">)</span>
+        <span class="n">tree</span><span class="o">.</span><span class="n">heading</span><span class="p">(</span><span class="s2">&quot;col6&quot;</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s2">&quot;Costo fijo&quot;</span><span class="p">)</span>
+        <span class="n">tree</span><span class="o">.</span><span class="n">heading</span><span class="p">(</span><span class="s2">&quot;col7&quot;</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s2">&quot;Margen&quot;</span><span class="p">)</span>
+
+        <span class="n">tree</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">column</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">row</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span> <span class="n">columnspan</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span> <span class="n">padx</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">objeto_base</span><span class="o">.</span><span class="n">mostrar</span><span class="p">(</span><span class="n">tree</span><span class="p">,</span> <span class="n">var_ordenar_str</span><span class="p">)</span></div>
+        <span class="c1"># llamo a la funcion mostrar para que el programase inicie con la base de datos actualizada en el tree</span>
+
+
+<span class="c1"># Nicolás Campanella Lerra</span>
+<span class="c1"># Curso 999188622</span>
+<span class="c1"># Python 3 - Nivel Intermedio</span>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Derechos de autor 2023, Nicolas.</p>
+  </div>
+
+  Compilado con <a href="https://www.sphinx-doc.org/">Sphinx</a> usando un
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">tema</a>
+    proporcionado por <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

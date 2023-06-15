@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="es" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>modelo &mdash; documentación de AppIntermedia - 0.0.1</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+        <script src="../_static/translations.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Índice" href="../genindex.html" />
+    <link rel="search" title="Búsqueda" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            AppIntermedia
+          </a>
+              <div class="version">
+                0.0.1
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Buscar documentos" aria-label="Buscar documentos" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../controlador.html">controlador module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../database.html">database module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../modelo.html">modelo module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../regex.html">regex module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../vista.html">vista module</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">AppIntermedia</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Código de módulo</a></li>
+      <li class="breadcrumb-item active">modelo</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Código fuente para modelo</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">tkinter</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">messagebox</span><span class="p">,</span>
+    <span class="n">TclError</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="c1"># import sqlite3</span>
+<span class="kn">from</span> <span class="nn">sqlite3</span> <span class="kn">import</span> <span class="n">connect</span><span class="p">,</span> <span class="n">IntegrityError</span>
+<span class="kn">from</span> <span class="nn">pandas</span> <span class="kn">import</span> <span class="n">read_sql_query</span>
+<span class="kn">from</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">import</span> <span class="n">bar</span><span class="p">,</span> <span class="n">gca</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span> <span class="n">show</span>
+<span class="kn">from</span> <span class="nn">regex</span> <span class="kn">import</span> <span class="n">validar</span>
+<span class="kn">from</span> <span class="nn">peewee</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">database</span> <span class="kn">import</span> <span class="n">db</span><span class="p">,</span><span class="n">Transformador</span>
+
+
+<span class="n">costo_fijo</span> <span class="o">=</span> <span class="mi">400</span>
+<span class="n">valor_transformador</span> <span class="o">=</span> <span class="mi">3750</span>
+<span class="n">precio_cobre</span> <span class="o">=</span> <span class="mi">16</span>
+<span class="n">precio_pintura</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">precio_aceite</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">precio_mo</span> <span class="o">=</span> <span class="mi">2</span>
+
+
+
+<span class="n">db</span><span class="o">.</span><span class="n">connect</span><span class="p">()</span>
+<span class="n">db</span><span class="o">.</span><span class="n">create_tables</span><span class="p">([</span><span class="n">Transformador</span><span class="p">])</span>
+
+<div class="viewcode-block" id="Abmc"><a class="viewcode-back" href="../modelo.html#modelo.Abmc">[documentos]</a><span class="k">class</span> <span class="nc">Abmc</span><span class="p">:</span>    
+  
+
+<div class="viewcode-block" id="Abmc.alta_trafo"><a class="viewcode-back" href="../modelo.html#modelo.Abmc.alta_trafo">[documentos]</a>    <span class="k">def</span> <span class="nf">alta_trafo</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">var_ordenar_str</span><span class="p">,</span>
+        <span class="n">var_aceite</span><span class="p">,</span>
+        <span class="n">var_cobre</span><span class="p">,</span>
+        <span class="nb">id</span><span class="p">,</span>
+        <span class="n">var_mo</span><span class="p">,</span>
+        <span class="n">var_ogp</span><span class="p">,</span>
+        <span class="n">var_pintura</span><span class="p">,</span>
+        <span class="n">valor_transformador</span><span class="p">,</span>
+        <span class="n">costo_fijo</span><span class="p">,</span>
+        <span class="n">margen</span><span class="p">,</span>
+        <span class="n">tree</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Este metodo toma los valores de los entry y los guarda en la base de datos.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            :self (Abmc): Instancia de la clase Abmc</span>
+<span class="sd">            :var_ordenar_str (StringVar): Da el orden para el treview. </span>
+<span class="sd">            :var_aceite (DoubleVar): Valor ingresado en el entry de los Lts de Aceite.</span>
+<span class="sd">            :var_cobre (DoubleVar): Valor ingresado en el entry de los Kgs de Cobre.</span>
+<span class="sd">            :id(StringVar): Valor ingresado Id del transformador. </span>
+<span class="sd">            :var_mo (DoubleVar): Valor ingresado en el entry de las horas hombre.</span>
+<span class="sd">            :var_ogp (DoubleVar): Valor ingresado en el entry de los Otros Gastos de Produccion.</span>
+<span class="sd">            :var_pintura (DoubleVar): Valor ingresado en el entry de los Lts de Pintura.</span>
+<span class="sd">            :valor_transformador (int): Valor a cobrar de cada transformador.</span>
+<span class="sd">            :costo_fijo(int): valor fijo del costo fijo que se le asigna a cada transformador.</span>
+<span class="sd">            :margen (int): Variable inicializada en 0 que contendra el margen de cada transformador.</span>
+<span class="sd">            :tree (Treeview): Variable del treeview.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">trafo</span> <span class="o">=</span> <span class="n">Transformador</span><span class="p">()</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">valor</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="nb">id</span><span class="o">.</span><span class="n">get</span><span class="p">())</span>            
+            <span class="k">if</span> <span class="n">validar</span><span class="p">(</span><span class="n">valor</span><span class="p">):</span>                
+                <span class="n">margen</span> <span class="o">=</span> <span class="p">(</span>
+                    <span class="nb">float</span><span class="p">(</span><span class="n">valor_transformador</span><span class="p">)</span>
+                    <span class="o">-</span> <span class="nb">float</span><span class="p">(</span><span class="n">var_aceite</span><span class="o">.</span><span class="n">get</span><span class="p">()</span> <span class="o">*</span> <span class="n">precio_aceite</span><span class="p">)</span>
+                    <span class="o">-</span> <span class="nb">float</span><span class="p">(</span><span class="n">var_cobre</span><span class="o">.</span><span class="n">get</span><span class="p">()</span> <span class="o">*</span> <span class="n">precio_cobre</span><span class="p">)</span>
+                    <span class="o">-</span> <span class="nb">float</span><span class="p">(</span><span class="n">var_mo</span><span class="o">.</span><span class="n">get</span><span class="p">()</span> <span class="o">*</span> <span class="n">precio_mo</span><span class="p">)</span>
+                    <span class="o">-</span> <span class="nb">float</span><span class="p">(</span><span class="n">var_pintura</span><span class="o">.</span><span class="n">get</span><span class="p">()</span> <span class="o">*</span> <span class="n">precio_pintura</span><span class="p">)</span>
+                    <span class="o">-</span> <span class="nb">float</span><span class="p">(</span><span class="n">costo_fijo</span><span class="p">)</span>
+                    <span class="o">-</span> <span class="nb">float</span><span class="p">(</span><span class="n">var_ogp</span><span class="o">.</span><span class="n">get</span><span class="p">())</span>
+                <span class="p">)</span>  
+                
+                <span class="n">trafo</span><span class="o">.</span><span class="n">mi_id</span> <span class="o">=</span> <span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="nb">id</span><span class="o">.</span><span class="n">get</span><span class="p">()))</span>
+                <span class="n">trafo</span><span class="o">.</span><span class="n">cobre</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">var_cobre</span><span class="o">.</span><span class="n">get</span><span class="p">()</span> <span class="o">*</span> <span class="n">precio_cobre</span><span class="p">),</span> <span class="mi">2</span><span class="p">)</span>
+                <span class="n">trafo</span><span class="o">.</span><span class="n">pintura</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">var_pintura</span><span class="o">.</span><span class="n">get</span><span class="p">()</span> <span class="o">*</span> <span class="n">precio_pintura</span><span class="p">),</span> <span class="mi">2</span><span class="p">)</span>
+                <span class="n">trafo</span><span class="o">.</span><span class="n">aceite</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">var_aceite</span><span class="o">.</span><span class="n">get</span><span class="p">()</span> <span class="o">*</span> <span class="n">precio_aceite</span><span class="p">),</span> <span class="mi">2</span><span class="p">)</span>
+                <span class="n">trafo</span><span class="o">.</span><span class="n">mo</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">var_mo</span><span class="o">.</span><span class="n">get</span><span class="p">()</span> <span class="o">*</span> <span class="n">precio_mo</span><span class="p">),</span> <span class="mi">2</span><span class="p">)</span>
+                <span class="n">trafo</span><span class="o">.</span><span class="n">ogp</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">var_ogp</span><span class="o">.</span><span class="n">get</span><span class="p">()),</span> <span class="mi">2</span><span class="p">)</span>
+                <span class="n">trafo</span><span class="o">.</span><span class="n">costos_fijos</span> <span class="o">=</span> <span class="n">costo_fijo</span>
+                <span class="n">trafo</span><span class="o">.</span><span class="n">valor_transformador</span> <span class="o">=</span> <span class="n">valor_transformador</span>
+                <span class="n">trafo</span><span class="o">.</span><span class="n">margen</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">margen</span><span class="p">),</span> <span class="mi">2</span><span class="p">)</span>
+                <span class="n">trafo</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+                
+                <span class="bp">self</span><span class="o">.</span><span class="n">mostrar</span><span class="p">(</span><span class="n">tree</span><span class="p">,</span> <span class="n">var_ordenar_str</span><span class="p">)</span>
+                <span class="n">messagebox</span><span class="o">.</span><span class="n">showinfo</span><span class="p">(</span>
+                    <span class="n">message</span><span class="o">=</span><span class="s2">&quot;Transformador registrado correctamente!&quot;</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Mensaje&quot;</span>
+                <span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+
+                <span class="n">messagebox</span><span class="o">.</span><span class="n">showinfo</span><span class="p">(</span>
+                    <span class="n">message</span><span class="o">=</span><span class="s2">&quot;El campo id solo admite números&quot;</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Error&quot;</span>
+                <span class="p">)</span>
+        <span class="k">except</span> <span class="n">TclError</span><span class="p">:</span>
+            <span class="n">messagebox</span><span class="o">.</span><span class="n">showinfo</span><span class="p">(</span>
+                <span class="n">message</span><span class="o">=</span><span class="s2">&quot;Valores invalidos. Recuerda que solo se admiten numeros reales!&quot;</span><span class="p">,</span>
+                <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Error&quot;</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="k">except</span> <span class="n">IntegrityError</span><span class="p">:</span>
+            <span class="n">messagebox</span><span class="o">.</span><span class="n">showinfo</span><span class="p">(</span><span class="n">message</span><span class="o">=</span><span class="s2">&quot;Este transformador ya existe!&quot;</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Error&quot;</span><span class="p">)</span></div>
+    
+<div class="viewcode-block" id="Abmc.modificar_trafo"><a class="viewcode-back" href="../modelo.html#modelo.Abmc.modificar_trafo">[documentos]</a>    <span class="k">def</span> <span class="nf">modificar_trafo</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">var_ordenar_str</span><span class="p">,</span>
+        <span class="n">tree</span><span class="p">,</span>
+        <span class="n">var_aceite</span><span class="p">,</span>
+        <span class="n">var_cobre</span><span class="p">,</span>
+        <span class="nb">id</span><span class="p">,</span>
+        <span class="n">var_mo</span><span class="p">,</span>
+        <span class="n">var_ogp</span><span class="p">,</span>
+        <span class="n">var_pintura</span><span class="p">,</span>
+        <span class="n">valor_transformador</span><span class="p">,</span>
+        <span class="n">costo_fijo</span><span class="p">,</span>
+        <span class="n">margen</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Este metodo toma los valores de los entry y los reemplaza en la base de datos en el registro que coincida con la id.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            :self (Abmc): Instancia de la clase Abmc</span>
+<span class="sd">            :var_ordenar_str (StringVar): Da el orden para el treview. </span>
+<span class="sd">            :var_aceite (DoubleVar): Valor ingresado en el entry de los Lts de Aceite.</span>
+<span class="sd">            :var_cobre (DoubleVar): Valor ingresado en el entry de los Kgs de Cobre.</span>
+<span class="sd">            :id (StringVar): Valor ingresado Id del transformador. </span>
+<span class="sd">            :var_mo (DoubleVar): Valor ingresado en el entry de las horas hombre.</span>
+<span class="sd">            :var_ogp (DoubleVar): Valor ingresado en el entry de los Otros Gastos de Produccion.</span>
+<span class="sd">            :var_pintura (DoubleVar): Valor ingresado en el entry de los Lts de Pintura.</span>
+<span class="sd">            :valor_transformador (int): Valor a cobrar de cada transformador.</span>
+<span class="sd">            :costo_fijo(int): Valor fijo del costo fijo que se le asigna a cada transformador.</span>
+<span class="sd">            :margen (int): Variable inicializada en 0 que contendra el margen de cada transformador.</span>
+<span class="sd">            :tree (Treeview): Variable del treeview.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>  
+            <span class="n">valor</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="nb">id</span><span class="o">.</span><span class="n">get</span><span class="p">())</span>            
+            <span class="k">if</span> <span class="n">validar</span><span class="p">(</span> <span class="n">valor</span><span class="p">):</span>               
+                <span class="n">margen</span> <span class="o">=</span> <span class="p">(</span>
+                    <span class="nb">float</span><span class="p">(</span><span class="n">valor_transformador</span><span class="p">)</span>
+                    <span class="o">-</span> <span class="nb">float</span><span class="p">(</span><span class="n">var_aceite</span><span class="o">.</span><span class="n">get</span><span class="p">()</span> <span class="o">*</span> <span class="n">precio_aceite</span><span class="p">)</span>
+                    <span class="o">-</span> <span class="nb">float</span><span class="p">(</span><span class="n">var_cobre</span><span class="o">.</span><span class="n">get</span><span class="p">()</span> <span class="o">*</span> <span class="n">precio_cobre</span><span class="p">)</span>
+                    <span class="o">-</span> <span class="nb">float</span><span class="p">(</span><span class="n">var_mo</span><span class="o">.</span><span class="n">get</span><span class="p">()</span> <span class="o">*</span> <span class="n">precio_mo</span><span class="p">)</span>
+                    <span class="o">-</span> <span class="nb">float</span><span class="p">(</span><span class="n">var_pintura</span><span class="o">.</span><span class="n">get</span><span class="p">()</span> <span class="o">*</span> <span class="n">precio_pintura</span><span class="p">)</span>
+                    <span class="o">-</span> <span class="nb">float</span><span class="p">(</span><span class="n">costo_fijo</span><span class="p">)</span>
+                    <span class="o">-</span> <span class="nb">float</span><span class="p">(</span><span class="n">var_ogp</span><span class="o">.</span><span class="n">get</span><span class="p">())</span>
+                <span class="p">)</span>  <span class="c1"># Calculo el margen restandoselo el valor del transformador a todos los costos</span>
+                
+                <span class="n">cobre_var</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">var_cobre</span><span class="o">.</span><span class="n">get</span><span class="p">()</span> <span class="o">*</span> <span class="n">precio_cobre</span><span class="p">),</span> <span class="mi">2</span><span class="p">)</span>
+                <span class="n">pintura_var</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">var_pintura</span><span class="o">.</span><span class="n">get</span><span class="p">()</span> <span class="o">*</span> <span class="n">precio_pintura</span><span class="p">),</span> <span class="mi">2</span><span class="p">)</span>
+                <span class="n">aceite_var</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">var_aceite</span><span class="o">.</span><span class="n">get</span><span class="p">()</span> <span class="o">*</span> <span class="n">precio_aceite</span><span class="p">),</span> <span class="mi">2</span><span class="p">)</span>
+                <span class="n">mo_var</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">var_mo</span><span class="o">.</span><span class="n">get</span><span class="p">()</span> <span class="o">*</span> <span class="n">precio_mo</span><span class="p">),</span> <span class="mi">2</span><span class="p">)</span>
+                <span class="n">ogp_var</span> <span class="o">=</span> <span class="n">var_ogp</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>               
+                <span class="n">margen_var</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">margen</span><span class="p">),</span> <span class="mi">2</span><span class="p">)</span>          
+                <span class="n">actualizar</span> <span class="o">=</span> <span class="n">Transformador</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">cobre</span><span class="o">=</span> <span class="n">cobre_var</span><span class="p">,</span><span class="n">pintura</span><span class="o">=</span> <span class="n">pintura_var</span><span class="p">,</span> <span class="n">aceite</span><span class="o">=</span> <span class="n">aceite_var</span><span class="p">,</span> <span class="n">mo</span><span class="o">=</span> <span class="n">mo_var</span><span class="p">,</span> <span class="n">ogp</span><span class="o">=</span> <span class="n">ogp_var</span><span class="p">,</span> <span class="n">margen</span> <span class="o">=</span> <span class="n">margen_var</span><span class="p">)</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">Transformador</span><span class="o">.</span><span class="n">mi_id</span> <span class="o">==</span> <span class="n">valor</span><span class="p">)</span>
+                <span class="n">actualizar</span><span class="o">.</span><span class="n">execute</span><span class="p">()</span>
+                
+                <span class="bp">self</span><span class="o">.</span><span class="n">mostrar</span><span class="p">(</span><span class="n">tree</span><span class="p">,</span> <span class="n">var_ordenar_str</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">messagebox</span><span class="o">.</span><span class="n">showinfo</span><span class="p">(</span>
+                    <span class="n">message</span><span class="o">=</span><span class="s2">&quot;El campo id solo admite números&quot;</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Error&quot;</span>
+                <span class="p">)</span>
+        <span class="k">except</span> <span class="n">TclError</span><span class="p">:</span>
+            <span class="n">messagebox</span><span class="o">.</span><span class="n">showinfo</span><span class="p">(</span>
+                <span class="n">message</span><span class="o">=</span><span class="s2">&quot;Valores invalidos. Recuerda que solo se admiten numeros reales!&quot;</span><span class="p">,</span>
+                <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Error&quot;</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>  
+            <span class="n">messagebox</span><span class="o">.</span><span class="n">showinfo</span><span class="p">(</span>
+                <span class="n">message</span><span class="o">=</span><span class="s2">&quot;Transformador modificado correctamente!&quot;</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Mensaje&quot;</span>
+            <span class="p">)</span></div>
+   
+<div class="viewcode-block" id="Abmc.buscar_id"><a class="viewcode-back" href="../modelo.html#modelo.Abmc.buscar_id">[documentos]</a>    <span class="k">def</span> <span class="nf">buscar_id</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">var_id_buscar</span><span class="p">,</span> <span class="n">tree</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Este metodo busca una registro en la base de dato por la id.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            :self (Abmc): Instancia de la clase Abmc.</span>
+<span class="sd">            :var_id_buscar (StringVar): Variable que contiene la id a buscar</span>
+<span class="sd">            :tree (Treeview): Variable del treeview.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">valor</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">var_id_buscar</span><span class="o">.</span><span class="n">get</span><span class="p">())</span>       
+        <span class="k">if</span> <span class="n">validar</span><span class="p">(</span><span class="n">valor</span><span class="p">):</span>           
+            <span class="n">mi_id</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">var_id_buscar</span><span class="o">.</span><span class="n">get</span><span class="p">())</span>
+            <span class="n">resultado</span> <span class="o">=</span> <span class="n">Transformador</span><span class="o">.</span><span class="n">select</span><span class="p">()</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">Transformador</span><span class="o">.</span><span class="n">mi_id</span> <span class="o">==</span> <span class="n">mi_id</span><span class="p">)</span>
+            <span class="n">tree</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="o">*</span><span class="n">tree</span><span class="o">.</span><span class="n">get_children</span><span class="p">())</span>
+            
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">resultado</span><span class="p">:</span>
+                <span class="n">tree</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span>  
+                    <span class="s2">&quot;&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;end&quot;</span><span class="p">,</span>
+                    <span class="n">text</span><span class="o">=</span><span class="n">i</span><span class="o">.</span><span class="n">mi_id</span><span class="p">,</span>
+                    <span class="n">values</span><span class="o">=</span><span class="p">(</span>
+                        <span class="n">i</span><span class="o">.</span><span class="n">cobre</span><span class="p">,</span>
+                        <span class="n">i</span><span class="o">.</span><span class="n">pintura</span><span class="p">,</span>
+                        <span class="n">i</span><span class="o">.</span><span class="n">aceite</span><span class="p">,</span>
+                        <span class="n">i</span><span class="o">.</span><span class="n">mo</span><span class="p">,</span>
+                        <span class="n">i</span><span class="o">.</span><span class="n">ogp</span><span class="p">,</span>
+                        <span class="n">i</span><span class="o">.</span><span class="n">costos_fijos</span><span class="p">,</span>
+                        <span class="n">i</span><span class="o">.</span><span class="n">margen</span><span class="p">,</span>
+                    <span class="p">),</span>
+                <span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">messagebox</span><span class="o">.</span><span class="n">showinfo</span><span class="p">(</span>
+                <span class="n">message</span><span class="o">=</span><span class="s2">&quot;El campo id solo admite números&quot;</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Error&quot;</span>
+            <span class="p">)</span></div>
+    
+<div class="viewcode-block" id="Abmc.borrar_id"><a class="viewcode-back" href="../modelo.html#modelo.Abmc.borrar_id">[documentos]</a>    <span class="k">def</span> <span class="nf">borrar_id</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">var_id_borrar</span><span class="p">,</span> <span class="n">tree</span><span class="p">,</span> <span class="n">var_ordenar_str</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Este metodo busca una registro en la base de dato por la id y lo borra.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            :self (Abmc): Instancia de la clase Abmc.</span>
+<span class="sd">            :var_id_borrar (StringVar): Variable que contiene la id a buscar</span>
+<span class="sd">            :tree (Treeview): Variable del treeview.</span>
+<span class="sd">            :var_ordenar_str (StringVar): Da el orden para el treview.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">valor</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">var_id_borrar</span><span class="o">.</span><span class="n">get</span><span class="p">())</span>        
+        <span class="k">if</span> <span class="n">validar</span><span class="p">(</span><span class="n">valor</span><span class="p">):</span>  <span class="c1"># uso regex para validar el ingreso de id</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">mi_id</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">var_id_borrar</span><span class="o">.</span><span class="n">get</span><span class="p">())</span>
+                <span class="n">contrador_inicial</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">contador_registros</span><span class="p">()</span>
+                <span class="n">borrar</span> <span class="o">=</span> <span class="n">Transformador</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">Transformador</span><span class="o">.</span><span class="n">mi_id</span><span class="o">==</span> <span class="n">mi_id</span><span class="p">)</span>
+                <span class="n">borrar</span><span class="o">.</span><span class="n">delete_instance</span><span class="p">()</span>                
+                <span class="bp">self</span><span class="o">.</span><span class="n">mostrar</span><span class="p">(</span><span class="n">tree</span><span class="p">,</span> <span class="n">var_ordenar_str</span><span class="p">)</span>
+                <span class="n">contador_final</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">contador_registros</span><span class="p">()</span>
+                <span class="k">if</span> <span class="p">(</span>
+                    <span class="n">contrador_inicial</span> <span class="o">!=</span> <span class="n">contador_final</span>
+                <span class="p">):</span>  
+                    <span class="n">messagebox</span><span class="o">.</span><span class="n">showinfo</span><span class="p">(</span><span class="n">message</span><span class="o">=</span><span class="s2">&quot;Registro Eliminado!&quot;</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Completado&quot;</span><span class="p">)</span>
+            <span class="k">except</span><span class="p">:</span>
+                 <span class="n">messagebox</span><span class="o">.</span><span class="n">showinfo</span><span class="p">(</span><span class="n">message</span><span class="o">=</span><span class="s2">&quot;El registro ingresado no existe.&quot;</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Error&quot;</span><span class="p">)</span>
+                                 
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">messagebox</span><span class="o">.</span><span class="n">showinfo</span><span class="p">(</span><span class="n">message</span><span class="o">=</span><span class="s2">&quot;El campo solo admite números.&quot;</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Error&quot;</span><span class="p">)</span></div>
+    
+<div class="viewcode-block" id="Abmc.mostrar"><a class="viewcode-back" href="../modelo.html#modelo.Abmc.mostrar">[documentos]</a>    <span class="k">def</span> <span class="nf">mostrar</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tree</span><span class="p">,</span> <span class="n">var_ordenar_str</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Este metodo inserta todos los registros de la base en el treeview ordenados segun la opcion elegida en el combobox.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            :self (Abmc): Instancia de la clase Abmc.</span>
+<span class="sd">            :var_ordenar_str (StringVar): Da el orden para el treview segun lo que eligio el usuario en el combobox.</span>
+<span class="sd">            :tree (Treeview): Variable del treeview.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">aux</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">var_ordenar_str</span><span class="o">.</span><span class="n">get</span><span class="p">())</span>
+        <span class="k">if</span> <span class="n">aux</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>  
+            <span class="n">aux</span> <span class="o">=</span> <span class="s2">&quot;id&quot;</span>      
+        <span class="n">tree</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="o">*</span><span class="n">tree</span><span class="o">.</span><span class="n">get_children</span><span class="p">())</span>
+        
+        <span class="k">if</span> <span class="n">aux</span> <span class="o">==</span> <span class="s2">&quot;cobre&quot;</span><span class="p">:</span>
+            <span class="n">ordenado</span> <span class="o">=</span> <span class="n">Transformador</span><span class="o">.</span><span class="n">cobre</span>
+        <span class="k">elif</span> <span class="n">aux</span> <span class="o">==</span> <span class="s2">&quot;aceite&quot;</span><span class="p">:</span>
+            <span class="n">ordenado</span> <span class="o">=</span> <span class="n">Transformador</span><span class="o">.</span><span class="n">aceite</span>
+        <span class="k">elif</span> <span class="n">aux</span> <span class="o">==</span> <span class="s2">&quot;ogp&quot;</span><span class="p">:</span>
+            <span class="n">ordenado</span> <span class="o">=</span> <span class="n">Transformador</span><span class="o">.</span><span class="n">ogp</span>
+        <span class="k">elif</span> <span class="n">aux</span> <span class="o">==</span> <span class="s2">&quot;pintura&quot;</span><span class="p">:</span>
+            <span class="n">ordenado</span> <span class="o">=</span> <span class="n">Transformador</span><span class="o">.</span><span class="n">pintura</span>
+        <span class="k">elif</span> <span class="n">aux</span> <span class="o">==</span> <span class="s2">&quot;margen&quot;</span><span class="p">:</span>
+            <span class="n">ordenado</span> <span class="o">=</span> <span class="n">Transformador</span><span class="o">.</span><span class="n">margen</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">ordenado</span> <span class="o">=</span> <span class="n">Transformador</span><span class="o">.</span><span class="n">mi_id</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">Transformador</span><span class="o">.</span><span class="n">select</span><span class="p">()</span><span class="o">.</span><span class="n">order_by</span><span class="p">(</span><span class="n">ordenado</span><span class="p">):</span>  
+            <span class="n">tree</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span>  
+                <span class="s2">&quot;&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;end&quot;</span><span class="p">,</span>
+                <span class="n">text</span><span class="o">=</span><span class="n">i</span><span class="o">.</span><span class="n">mi_id</span><span class="p">,</span>
+                <span class="n">values</span><span class="o">=</span><span class="p">(</span>
+                    <span class="n">i</span><span class="o">.</span><span class="n">cobre</span><span class="p">,</span>
+                    <span class="n">i</span><span class="o">.</span><span class="n">pintura</span><span class="p">,</span>
+                    <span class="n">i</span><span class="o">.</span><span class="n">aceite</span><span class="p">,</span>
+                    <span class="n">i</span><span class="o">.</span><span class="n">mo</span><span class="p">,</span>
+                    <span class="n">i</span><span class="o">.</span><span class="n">ogp</span><span class="p">,</span>
+                    <span class="n">i</span><span class="o">.</span><span class="n">costos_fijos</span><span class="p">,</span>
+                    <span class="n">i</span><span class="o">.</span><span class="n">margen</span><span class="p">,</span>
+                <span class="p">),</span>
+            <span class="p">)</span></div>
+    
+   
+<div class="viewcode-block" id="Abmc.contador_registros"><a class="viewcode-back" href="../modelo.html#modelo.Abmc.contador_registros">[documentos]</a>    <span class="k">def</span> <span class="nf">contador_registros</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Este metodo cuenta los registros existentes en la base de datos.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            :self (Abmc): Instancia de la clase Abmc</span>
+
+<span class="sd">        :returns: La cantidad de registros de la base de datos.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">sql</span> <span class="o">=</span> <span class="n">Transformador</span><span class="o">.</span><span class="n">select</span><span class="p">()</span>        
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">sql</span><span class="p">)</span></div>
+    
+    
+<div class="viewcode-block" id="Abmc.graficos"><a class="viewcode-back" href="../modelo.html#modelo.Abmc.graficos">[documentos]</a>    <span class="k">def</span> <span class="nf">graficos</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Este metodo muestra un grafico en pantalla del margen de cada transformador. </span>
+<span class="sd">        Usa pandas para crear un dataframe y lo grafica mediante matplotlib.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            :self (Abmc): Instancia de la clase Abmc.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>        
+        <span class="n">con</span> <span class="o">=</span> <span class="n">connect</span><span class="p">(</span><span class="s2">&quot;base_trafos1.db&quot;</span><span class="p">)</span>        
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">df</span> <span class="o">=</span> <span class="n">read_sql_query</span><span class="p">(</span>
+                    <span class="s2">&quot;SELECT mi_id, margen from Transformador&quot;</span><span class="p">,</span> <span class="n">con</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="s2">&quot;mi_id&quot;</span>
+                <span class="p">)</span>
+
+            <span class="n">df</span><span class="p">[</span><span class="s2">&quot;margen&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s2">&quot;bar&quot;</span><span class="p">)</span>
+
+            <span class="n">bar</span><span class="p">(</span>
+                    <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">contador_registros</span><span class="p">()),</span>
+                    <span class="n">df</span><span class="p">[</span><span class="s2">&quot;margen&quot;</span><span class="p">],</span>
+                    <span class="n">align</span><span class="o">=</span><span class="s2">&quot;center&quot;</span><span class="p">,</span>
+                    <span class="n">color</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;blue&quot;</span><span class="p">,</span> <span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="s2">&quot;lightgreen&quot;</span><span class="p">,</span> <span class="s2">&quot;orange&quot;</span><span class="p">,</span> <span class="s2">&quot;yellow&quot;</span><span class="p">,</span> <span class="s2">&quot;purple&quot;</span><span class="p">],</span>
+                    <span class="n">edgecolor</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span>
+                <span class="p">)</span>
+            <span class="n">ax</span> <span class="o">=</span> <span class="n">gca</span><span class="p">()</span>
+            <span class="n">ax</span><span class="o">.</span><span class="n">set_facecolor</span><span class="p">(</span><span class="s2">&quot;lightgrey&quot;</span><span class="p">)</span>
+            <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Margen&quot;</span><span class="p">)</span>
+            <span class="n">title</span><span class="p">(</span><span class="s2">&quot;Margen de ganancia de cada transformador&quot;</span><span class="p">)</span>
+            <span class="n">show</span><span class="p">()</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="n">messagebox</span><span class="o">.</span><span class="n">showinfo</span><span class="p">(</span>
+                <span class="n">message</span><span class="o">=</span><span class="s2">&quot;La base de datos esta vacia. No hay graficos para mostrar.&quot;</span><span class="p">,</span>
+                <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Error&quot;</span><span class="p">,</span>
+             <span class="p">)</span></div></div>
+
+
+<span class="c1"># Nicolás Campanella Lerra</span>
+<span class="c1"># Curso 999188622</span>
+<span class="c1"># Python 3 - Nivel Intermedio</span>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Derechos de autor 2023, Nicolas.</p>
+  </div>
+
+  Compilado con <a href="https://www.sphinx-doc.org/">Sphinx</a> usando un
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">tema</a>
+    proporcionado por <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

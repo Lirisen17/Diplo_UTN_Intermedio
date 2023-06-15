@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="es" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>modelo module &mdash; documentación de AppIntermedia - 0.0.1</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+        <script src="_static/translations.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Índice" href="genindex.html" />
+    <link rel="search" title="Búsqueda" href="search.html" />
+    <link rel="next" title="regex module" href="regex.html" />
+    <link rel="prev" title="database module" href="database.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            AppIntermedia
+          </a>
+              <div class="version">
+                0.0.1
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Buscar documentos" aria-label="Buscar documentos" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="controlador.html">controlador module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="database.html">database module</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">modelo module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#modelo.Abmc"><code class="docutils literal notranslate"><span class="pre">Abmc</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#modelo.Abmc.alta_trafo"><code class="docutils literal notranslate"><span class="pre">Abmc.alta_trafo()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#modelo.Abmc.borrar_id"><code class="docutils literal notranslate"><span class="pre">Abmc.borrar_id()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#modelo.Abmc.buscar_id"><code class="docutils literal notranslate"><span class="pre">Abmc.buscar_id()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#modelo.Abmc.contador_registros"><code class="docutils literal notranslate"><span class="pre">Abmc.contador_registros()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#modelo.Abmc.graficos"><code class="docutils literal notranslate"><span class="pre">Abmc.graficos()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#modelo.Abmc.modificar_trafo"><code class="docutils literal notranslate"><span class="pre">Abmc.modificar_trafo()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#modelo.Abmc.mostrar"><code class="docutils literal notranslate"><span class="pre">Abmc.mostrar()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="regex.html">regex module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vista.html">vista module</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">AppIntermedia</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">modelo module</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/modelo.rst.txt" rel="nofollow"> Ver código fuente de la página</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-modelo">
+<span id="modelo-module"></span><h1>modelo module<a class="headerlink" href="#module-modelo" title="Enlace permanente a este encabezado"></a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="modelo.Abmc">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelo.</span></span><span class="sig-name descname"><span class="pre">Abmc</span></span><a class="reference internal" href="_modules/modelo.html#Abmc"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#modelo.Abmc" title="Enlazar permanentemente con esta definición"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="modelo.Abmc.alta_trafo">
+<span class="sig-name descname"><span class="pre">alta_trafo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">var_ordenar_str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">var_aceite</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">var_cobre</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">var_mo</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">var_ogp</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">var_pintura</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">valor_transformador</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">costo_fijo</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">margen</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tree</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelo.html#Abmc.alta_trafo"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#modelo.Abmc.alta_trafo" title="Enlazar permanentemente con esta definición"></a></dt>
+<dd><p>Este metodo toma los valores de los entry y los guarda en la base de datos.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><dl class="field-list simple">
+<dt class="field-odd">self (Abmc)<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Instancia de la clase Abmc</p>
+</dd>
+<dt class="field-even">var_ordenar_str (StringVar)<span class="colon">:</span></dt>
+<dd class="field-even"><p>Da el orden para el treview.</p>
+</dd>
+<dt class="field-odd">var_aceite (DoubleVar)<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Valor ingresado en el entry de los Lts de Aceite.</p>
+</dd>
+<dt class="field-even">var_cobre (DoubleVar)<span class="colon">:</span></dt>
+<dd class="field-even"><p>Valor ingresado en el entry de los Kgs de Cobre.</p>
+</dd>
+<dt class="field-odd">id(StringVar)<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Valor ingresado Id del transformador.</p>
+</dd>
+<dt class="field-even">var_mo (DoubleVar)<span class="colon">:</span></dt>
+<dd class="field-even"><p>Valor ingresado en el entry de las horas hombre.</p>
+</dd>
+<dt class="field-odd">var_ogp (DoubleVar)<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Valor ingresado en el entry de los Otros Gastos de Produccion.</p>
+</dd>
+<dt class="field-even">var_pintura (DoubleVar)<span class="colon">:</span></dt>
+<dd class="field-even"><p>Valor ingresado en el entry de los Lts de Pintura.</p>
+</dd>
+<dt class="field-odd">valor_transformador (int)<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Valor a cobrar de cada transformador.</p>
+</dd>
+<dt class="field-even">costo_fijo(int)<span class="colon">:</span></dt>
+<dd class="field-even"><p>valor fijo del costo fijo que se le asigna a cada transformador.</p>
+</dd>
+<dt class="field-odd">margen (int)<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Variable inicializada en 0 que contendra el margen de cada transformador.</p>
+</dd>
+<dt class="field-even">tree (Treeview)<span class="colon">:</span></dt>
+<dd class="field-even"><p>Variable del treeview.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modelo.Abmc.borrar_id">
+<span class="sig-name descname"><span class="pre">borrar_id</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">var_id_borrar</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tree</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">var_ordenar_str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelo.html#Abmc.borrar_id"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#modelo.Abmc.borrar_id" title="Enlazar permanentemente con esta definición"></a></dt>
+<dd><p>Este metodo busca una registro en la base de dato por la id y lo borra.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><dl class="field-list simple">
+<dt class="field-odd">self (Abmc)<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Instancia de la clase Abmc.</p>
+</dd>
+<dt class="field-even">var_id_borrar (StringVar)<span class="colon">:</span></dt>
+<dd class="field-even"><p>Variable que contiene la id a buscar</p>
+</dd>
+<dt class="field-odd">tree (Treeview)<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Variable del treeview.</p>
+</dd>
+<dt class="field-even">var_ordenar_str (StringVar)<span class="colon">:</span></dt>
+<dd class="field-even"><p>Da el orden para el treview.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modelo.Abmc.buscar_id">
+<span class="sig-name descname"><span class="pre">buscar_id</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">var_id_buscar</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tree</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelo.html#Abmc.buscar_id"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#modelo.Abmc.buscar_id" title="Enlazar permanentemente con esta definición"></a></dt>
+<dd><p>Este metodo busca una registro en la base de dato por la id.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><dl class="field-list simple">
+<dt class="field-odd">self (Abmc)<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Instancia de la clase Abmc.</p>
+</dd>
+<dt class="field-even">var_id_buscar (StringVar)<span class="colon">:</span></dt>
+<dd class="field-even"><p>Variable que contiene la id a buscar</p>
+</dd>
+<dt class="field-odd">tree (Treeview)<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Variable del treeview.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modelo.Abmc.contador_registros">
+<span class="sig-name descname"><span class="pre">contador_registros</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelo.html#Abmc.contador_registros"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#modelo.Abmc.contador_registros" title="Enlazar permanentemente con esta definición"></a></dt>
+<dd><p>Este metodo cuenta los registros existentes en la base de datos.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><dl class="field-list simple">
+<dt class="field-odd">self (Abmc)<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Instancia de la clase Abmc</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Devuelve<span class="colon">:</span></dt>
+<dd class="field-odd"><p>La cantidad de registros de la base de datos.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modelo.Abmc.graficos">
+<span class="sig-name descname"><span class="pre">graficos</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelo.html#Abmc.graficos"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#modelo.Abmc.graficos" title="Enlazar permanentemente con esta definición"></a></dt>
+<dd><p>Este metodo muestra un grafico en pantalla del margen de cada transformador. 
+Usa pandas para crear un dataframe y lo grafica mediante matplotlib.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><dl class="field-list simple">
+<dt class="field-odd">self (Abmc)<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Instancia de la clase Abmc.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modelo.Abmc.modificar_trafo">
+<span class="sig-name descname"><span class="pre">modificar_trafo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">var_ordenar_str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tree</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">var_aceite</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">var_cobre</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">var_mo</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">var_ogp</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">var_pintura</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">valor_transformador</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">costo_fijo</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">margen</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelo.html#Abmc.modificar_trafo"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#modelo.Abmc.modificar_trafo" title="Enlazar permanentemente con esta definición"></a></dt>
+<dd><p>Este metodo toma los valores de los entry y los reemplaza en la base de datos en el registro que coincida con la id.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><dl class="field-list simple">
+<dt class="field-odd">self (Abmc)<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Instancia de la clase Abmc</p>
+</dd>
+<dt class="field-even">var_ordenar_str (StringVar)<span class="colon">:</span></dt>
+<dd class="field-even"><p>Da el orden para el treview.</p>
+</dd>
+<dt class="field-odd">var_aceite (DoubleVar)<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Valor ingresado en el entry de los Lts de Aceite.</p>
+</dd>
+<dt class="field-even">var_cobre (DoubleVar)<span class="colon">:</span></dt>
+<dd class="field-even"><p>Valor ingresado en el entry de los Kgs de Cobre.</p>
+</dd>
+<dt class="field-odd">id (StringVar)<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Valor ingresado Id del transformador.</p>
+</dd>
+<dt class="field-even">var_mo (DoubleVar)<span class="colon">:</span></dt>
+<dd class="field-even"><p>Valor ingresado en el entry de las horas hombre.</p>
+</dd>
+<dt class="field-odd">var_ogp (DoubleVar)<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Valor ingresado en el entry de los Otros Gastos de Produccion.</p>
+</dd>
+<dt class="field-even">var_pintura (DoubleVar)<span class="colon">:</span></dt>
+<dd class="field-even"><p>Valor ingresado en el entry de los Lts de Pintura.</p>
+</dd>
+<dt class="field-odd">valor_transformador (int)<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Valor a cobrar de cada transformador.</p>
+</dd>
+<dt class="field-even">costo_fijo(int)<span class="colon">:</span></dt>
+<dd class="field-even"><p>Valor fijo del costo fijo que se le asigna a cada transformador.</p>
+</dd>
+<dt class="field-odd">margen (int)<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Variable inicializada en 0 que contendra el margen de cada transformador.</p>
+</dd>
+<dt class="field-even">tree (Treeview)<span class="colon">:</span></dt>
+<dd class="field-even"><p>Variable del treeview.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modelo.Abmc.mostrar">
+<span class="sig-name descname"><span class="pre">mostrar</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tree</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">var_ordenar_str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelo.html#Abmc.mostrar"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#modelo.Abmc.mostrar" title="Enlazar permanentemente con esta definición"></a></dt>
+<dd><p>Este metodo inserta todos los registros de la base en el treeview ordenados segun la opcion elegida en el combobox.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><dl class="field-list simple">
+<dt class="field-odd">self (Abmc)<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Instancia de la clase Abmc.</p>
+</dd>
+<dt class="field-even">var_ordenar_str (StringVar)<span class="colon">:</span></dt>
+<dd class="field-even"><p>Da el orden para el treview segun lo que eligio el usuario en el combobox.</p>
+</dd>
+<dt class="field-odd">tree (Treeview)<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Variable del treeview.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Pie de página">
+        <a href="database.html" class="btn btn-neutral float-left" title="database module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Anterior</a>
+        <a href="regex.html" class="btn btn-neutral float-right" title="regex module" accesskey="n" rel="next">Siguiente <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Derechos de autor 2023, Nicolas.</p>
+  </div>
+
+  Compilado con <a href="https://www.sphinx-doc.org/">Sphinx</a> usando un
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">tema</a>
+    proporcionado por <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
